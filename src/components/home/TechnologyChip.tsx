@@ -9,7 +9,7 @@ interface Props {
   label: string;
 }
 
-// Chip visual para mostrar tecnologías.
+// Chip visual para mostrar tecnologías
 export default function TechnologyChip({ label }: Props) {
   const { currentColors } = useThemeColors();
 
@@ -18,8 +18,8 @@ export default function TechnologyChip({ label }: Props) {
       style={[
         styles.chip,
         {
-          backgroundColor: currentColors.surface,
-          color: currentColors.primary,
+          backgroundColor: currentColors.chipBackground,
+          color: currentColors.textSecondary,
           borderColor: currentColors.border,
         },
       ]}
@@ -31,12 +31,15 @@ export default function TechnologyChip({ label }: Props) {
 
 const styles = StyleSheet.create({
   chip: {
+    minWidth: 88,
+    height: 42,
     paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
     borderRadius: radius.lg,
     borderWidth: 1,
     fontSize: typography.caption,
-    fontWeight: "700",
+    fontWeight: "800",
+    lineHeight: 40,
+    textAlign: "center",
     overflow: "hidden",
   },
 });

@@ -1,29 +1,48 @@
 export const colors = {
   light: {
-    primary: "#1F3C88",
-    secondary: "#4B6584",
-    accent: "#3EC1D3",
+    // Branding
+    primary: "#606C38",
+    secondary: "#283618",
+    accent: "#DDA15E",
 
-    background: "#F5F7FA",
-    surface: "#FFFFFF",
+    // Layout
+    background: "#FEFAE0",
+    surface: "#FFFDF0",
+    card: "#FFFFFF",
 
-    text: "#1A1A1A",
-    textSecondary: "#6B7280",
+    // Text
+    text: "#1F2937",
+    textSecondary: "#5F6454",
 
-    border: "#E5E7EB",
+    // States
+    success: "#606C38",
+    warning: "#DDA15E",
+    error: "#BC6C25",
+
+    // UI
+    border: "#E6DFC5",
+    chipBackground: "#F3EACB",
   },
 
   dark: {
-    primary: "#5B8CFF",
-    secondary: "#AAB4C8",
-    accent: "#4FD1C5",
+    primary: "#343f2c",
+    secondary: "#757a58",
+    accent: "#BC6C25",
 
-    background: "#0F172A",
-    surface: "#1E293B",
+    background: "#151A0F",
+    surface: "#1D2415",
+    card: "#283618",
 
-    text: "#F8FAFC",
-    textSecondary: "#CBD5E1",
+    navigation: "#10140B",
 
-    border: "#334155",
+    text: "#FEFAE0",
+    textSecondary: "#CFC7A4",
+
+    success: "#606C38",
+    warning: "#DDA15E",
+    error: "#BC6C25",
+
+    border: "#3A4324",
+    chipBackground: "#242D18",
   },
 };

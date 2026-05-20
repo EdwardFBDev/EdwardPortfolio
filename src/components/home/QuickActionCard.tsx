@@ -37,7 +37,7 @@ export default function QuickActionCard({ title, icon, onPress }: Props) {
           },
         ]}
       >
-        <Ionicons name={icon} size={22} color={currentColors.primary} />
+        <Ionicons name={icon} size={22} color={currentColors.textSecondary} />
       </View>
 
       <Text style={[styles.title, { color: currentColors.text }]}>{title}</Text>

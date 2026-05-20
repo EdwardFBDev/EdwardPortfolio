@@ -7,6 +7,7 @@ import { typography } from "@/theme/typography";
 import { radius } from "@/theme/radius";
 import { shadows } from "@/theme/shadows";
 import { useThemeColors } from "@/hooks/useThemeColors";
+import { colors } from "@/theme/colors";
 
 interface Props {
   project: Project;
@@ -15,7 +16,7 @@ interface Props {
 
 // Tarjeta reutilizable para mostrar un proyecto.
 export default function ProjectCard({ project, onPress }: Props) {
-  const { theme, currentColors } = useThemeColors();
+  const { currentColors } = useThemeColors();
 
   return (
     <Pressable
@@ -23,14 +24,14 @@ export default function ProjectCard({ project, onPress }: Props) {
       style={({ pressed }) => [
         styles.card,
         {
-          backgroundColor: currentColors.surface,
+          backgroundColor: currentColors.card,
           borderColor: currentColors.border,
           opacity: pressed ? 0.9 : 1,
           transform: [{ scale: pressed ? 0.98 : 1 }],
         },
       ]}
     >
-      <View style={styles.thumbnail}>
+      <View style={[styles.thumbnail, { backgroundColor: currentColors.secondary }]}>
         <Ionicons name="layers-outline" size={30} color={currentColors.accent} />
       </View>
 
@@ -43,7 +44,7 @@ export default function ProjectCard({ project, onPress }: Props) {
           <Ionicons
             name="bookmark-outline"
             size={20}
-            color={currentColors.secondary}
+            color={currentColors.textSecondary}
           />
         </View>
 
@@ -57,19 +58,23 @@ export default function ProjectCard({ project, onPress }: Props) {
         <View style={styles.bottomRow}>
           <View style={styles.techRow}>
             {project.technologies.slice(0, 3).map((tech) => (
-              <Text
+              <View
                 key={tech}
                 style={[
                   styles.chip,
                   {
-                    backgroundColor:
-                      theme === "dark" ? "rgba(91,140,255,0.16)" : "#EAF0FF",
-                    color: currentColors.primary,
+                    backgroundColor: currentColors.chipBackground,
+                    borderColor: currentColors.border,
                   },
                 ]}
               >
-                {tech}
-              </Text>
+                <Text
+                  numberOfLines={1}
+                  style={[styles.chipText, { color: currentColors.textSecondary }]}
+                >
+                  {tech}
+                </Text>
+              </View>
             ))}
           </View>
 
@@ -84,7 +89,7 @@ export default function ProjectCard({ project, onPress }: Props) {
 
 const styles = StyleSheet.create({
   card: {
-    minHeight: 120,
+    minHeight: 124,
     flexDirection: "row",
     gap: spacing.md,
     padding: spacing.md,
@@ -94,10 +99,9 @@ const styles = StyleSheet.create({
     ...shadows.card,
   },
   thumbnail: {
-    width: 84,
-    height: 84,
+    width: 86,
+    height: 86,
     borderRadius: radius.md,
-    backgroundColor: "#071A3D",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -118,7 +122,7 @@ const styles = StyleSheet.create({
   description: {
     marginTop: spacing.xs,
     fontSize: typography.bodySmall,
-    lineHeight: 19,
+    lineHeight: 20,
   },
   bottomRow: {
     marginTop: spacing.sm,
@@ -134,15 +138,24 @@ const styles = StyleSheet.create({
     gap: spacing.xs,
   },
   chip: {
+    height: 20,
+    minWidth: 72,
+    maxWidth: 110,
     paddingHorizontal: spacing.sm,
-    paddingVertical: 5,
     borderRadius: radius.md,
+    borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  chipText: {
     fontSize: 10,
-    fontWeight: "700",
-    overflow: "hidden",
+    fontWeight: "800",
+    gap: 10,
+    color: colors.dark.textSecondary,
   },
   year: {
     fontSize: typography.caption,
-    fontWeight: "700",
+    fontWeight: "800",
+    marginBottom: 5,
   },
 });

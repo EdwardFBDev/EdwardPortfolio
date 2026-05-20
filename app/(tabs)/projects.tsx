@@ -14,7 +14,7 @@ import { useThemeColors } from "@/hooks/useThemeColors";
 
 const filters = ["Todos", "Web App", "Mobile App", "Backend", "Dashboard"];
 
-// Pantalla que muestra los proyectos usando FlatList.
+// Pantalla que muestra proyectos simulados usando FlatList.
 export default function ProjectsScreen() {
   const [selectedFilter, setSelectedFilter] = useState("Todos");
   const { currentColors } = useThemeColors();
@@ -28,7 +28,7 @@ export default function ProjectsScreen() {
     <ScreenContainer>
       <View style={styles.header}>
         <View style={styles.headerTop}>
-          <View>
+          <View style={styles.headerTextBlock}>
             <Text style={[styles.title, { color: currentColors.text }]}>
               Mis Proyectos
             </Text>
@@ -103,6 +103,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     gap: spacing.lg,
   },
+  headerTextBlock: {
+    flex: 1,
+  },
   title: {
     fontSize: typography.h1,
     fontWeight: "800",
@@ -110,6 +113,7 @@ const styles = StyleSheet.create({
   subtitle: {
     marginTop: spacing.xs,
     fontSize: typography.bodySmall,
+    lineHeight: 20,
   },
   filtersRow: {
     marginTop: spacing.xl,
@@ -118,14 +122,16 @@ const styles = StyleSheet.create({
     gap: spacing.sm,
   },
   filterChip: {
+    minHeight: 30,
     paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.sm,
     borderRadius: radius.xl,
     borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
   filterText: {
     fontSize: typography.caption,
-    fontWeight: "700",
+    fontWeight: "800",
   },
   list: {
     paddingHorizontal: spacing.xl,

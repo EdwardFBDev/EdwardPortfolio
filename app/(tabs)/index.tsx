@@ -22,45 +22,19 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
       >
-        <View
-          style={[
-            styles.heroSection,
-            {
-              backgroundColor: currentColors.primary,
-            },
-          ]}
-        >
+        <View style={[styles.heroSection, { backgroundColor: currentColors.primary }]}>
           <View style={styles.topIcons}>
             <ThemeToggle variant="hero" />
           </View>
 
-          <View style={styles.heroContent}>
-            <View style={styles.heroTextContainer}>
+          <View style={styles.heroMainRow}>
+            <View style={styles.heroNameBlock}>
               <Text style={styles.greeting}>Hola, soy</Text>
 
-              <Text style={styles.name}>Edward</Text>
+              <Text style={styles.name}>Eduardo</Text>
               <Text style={styles.lastname}>Funes B.</Text>
 
               <Text style={styles.role}>Full Stack Developer</Text>
-
-              <Text style={styles.description}>
-                Desarrollador apasionado por crear soluciones digitales
-                escalables, elegantes y centradas en el usuario.
-              </Text>
-
-              <View style={styles.socialRow}>
-                <View style={styles.socialButton}>
-                  <Ionicons name="logo-github" size={18} color="#FFFFFF" />
-                </View>
-
-                <View style={styles.socialButton}>
-                  <Ionicons name="logo-linkedin" size={18} color="#FFFFFF" />
-                </View>
-
-                <View style={styles.socialButton}>
-                  <Ionicons name="mail" size={18} color="#FFFFFF" />
-                </View>
-              </View>
             </View>
 
             <Image
@@ -69,6 +43,25 @@ export default function HomeScreen() {
               }}
               style={styles.avatar}
             />
+          </View>
+
+          <Text style={styles.description}>
+            Desarrollador apasionado por crear soluciones digitales escalables,
+            elegantes y centradas en el usuario.
+          </Text>
+
+          <View style={styles.socialRow}>
+            <View style={styles.socialButton}>
+              <Ionicons name="logo-github" size={18} color="#FFFFFF" />
+            </View>
+
+            <View style={styles.socialButton}>
+              <Ionicons name="logo-linkedin" size={18} color="#FFFFFF" />
+            </View>
+
+            <View style={styles.socialButton}>
+              <Ionicons name="mail" size={18} color="#FFFFFF" />
+            </View>
           </View>
         </View>
 
@@ -116,7 +109,7 @@ export default function HomeScreen() {
 
             <Text
               onPress={() => router.push("/projects")}
-              style={[styles.viewAllText, { color: currentColors.primary }]}
+              style={[styles.viewAllText, { color: currentColors.textSecondary }]}
             >
               Ver todos
             </Text>
@@ -129,7 +122,7 @@ export default function HomeScreen() {
                 style={[
                   styles.projectPreview,
                   {
-                    backgroundColor: currentColors.surface,
+                    backgroundColor: currentColors.card,
                     borderColor: currentColors.border,
                   },
                 ]}
@@ -137,7 +130,7 @@ export default function HomeScreen() {
                 <Ionicons
                   name="layers-outline"
                   size={28}
-                  color={currentColors.primary}
+                  color={currentColors.accent}
                 />
               </View>
             ))}
@@ -155,47 +148,51 @@ const styles = StyleSheet.create({
   heroSection: {
     paddingTop: 50,
     paddingHorizontal: spacing.xl,
-    paddingBottom: spacing.xl,
+    paddingBottom: spacing.xxl,
   },
   topIcons: {
     flexDirection: "row",
     justifyContent: "flex-end",
   },
-  heroContent: {
+  heroMainRow: {
     flexDirection: "row",
+    alignItems: "center",
     justifyContent: "space-between",
     marginTop: spacing.xl,
+    gap: spacing.lg,
   },
-  heroTextContainer: {
+  heroNameBlock: {
     flex: 1,
-    paddingRight: spacing.lg,
   },
   greeting: {
-    color: "#FFFFFF",
+    color: "#e3e4cb",
     fontSize: typography.body,
+    fontWeight: "600",
   },
   name: {
     marginTop: spacing.sm,
-    color: "#FFFFFF",
+    color: "#e3e4cb",
     fontSize: 38,
     fontWeight: "800",
   },
   lastname: {
-    color: "#FFFFFF",
+    color: "#e3e4cb",
     fontSize: 38,
     fontWeight: "800",
   },
   role: {
     marginTop: spacing.sm,
-    color: "#5EEAD4",
+    color: "#d1c46b",
     fontSize: typography.bodyLarge,
-    fontWeight: "700",
+    fontWeight: "800",
   },
   description: {
-    marginTop: spacing.lg,
-    color: "rgba(255,255,255,0.82)",
-    lineHeight: 24,
+    marginTop: spacing.xl,
+    maxWidth: "92%",
+    color: "#e3e4cb",
+    lineHeight: 25,
     fontSize: typography.body,
+    fontWeight: "600",
   },
   socialRow: {
     flexDirection: "row",
@@ -206,15 +203,15 @@ const styles = StyleSheet.create({
     width: 42,
     height: 42,
     borderRadius: 21,
-    backgroundColor: "rgba(255,255,255,0.14)",
+    backgroundColor: "rgba(255,255,255,0.16)",
     alignItems: "center",
     justifyContent: "center",
   },
   avatar: {
-    width: 160,
-    height: 160,
+    width: 150,
+    height: 150,
     borderRadius: 100,
-    borderWidth: 3,
+    borderWidth: 4,
     borderColor: "#FFFFFF",
   },
   contentContainer: {
@@ -243,7 +240,7 @@ const styles = StyleSheet.create({
     marginBottom: spacing.lg,
   },
   viewAllText: {
-    fontWeight: "700",
+    fontWeight: "800",
   },
   projectPreview: {
     width: 150,

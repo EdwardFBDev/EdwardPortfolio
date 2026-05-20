@@ -22,7 +22,7 @@ import { useThemeColors } from "@/hooks/useThemeColors";
 // Pantalla de detalle para mostrar más información del proyecto seleccionado.
 export default function ProjectDetailsScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { theme, currentColors } = useThemeColors();
+  const { currentColors } = useThemeColors();
 
   const project = projects.find((item) => item.id === id);
 
@@ -56,7 +56,7 @@ export default function ProjectDetailsScreen() {
   return (
     <ScreenContainer>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={[styles.hero, { backgroundColor: currentColors.primary }]}>
+        <View style={[styles.hero, { backgroundColor: currentColors.secondary }]}>
           <View style={styles.topBar}>
             <Pressable onPress={() => router.back()}>
               <Ionicons name="chevron-back" size={28} color="#FFFFFF" />
@@ -87,12 +87,12 @@ export default function ProjectDetailsScreen() {
               style={[
                 styles.categoryBadge,
                 {
-                  backgroundColor: currentColors.surface,
+                  backgroundColor: currentColors.card,
                   borderColor: currentColors.border,
                 },
               ]}
             >
-              <Text style={[styles.categoryText, { color: currentColors.secondary }]}>
+              <Text style={[styles.categoryText, { color: currentColors.primary }]}>
                 {project.category}
               </Text>
             </View>
@@ -108,19 +108,20 @@ export default function ProjectDetailsScreen() {
 
           <View style={styles.techContainer}>
             {project.technologies.map((tech) => (
-              <Text
+              <View
                 key={tech}
                 style={[
                   styles.techChip,
                   {
-                    backgroundColor:
-                      theme === "dark" ? "rgba(91,140,255,0.16)" : "#EAF0FF",
-                    color: currentColors.primary,
+                    backgroundColor: currentColors.chipBackground,
+                    borderColor: currentColors.border,
                   },
                 ]}
               >
-                {tech}
-              </Text>
+                <Text style={[styles.techChipText, { color: currentColors.primary }]}>
+                  {tech}
+                </Text>
+              </View>
             ))}
           </View>
 
@@ -129,12 +130,16 @@ export default function ProjectDetailsScreen() {
               style={[
                 styles.infoCard,
                 {
-                  backgroundColor: currentColors.surface,
+                  backgroundColor: currentColors.card,
                   borderColor: currentColors.border,
                 },
               ]}
             >
-              <Ionicons name="checkmark-circle-outline" size={18} color="#22C55E" />
+              <Ionicons
+                name="checkmark-circle-outline"
+                size={18}
+                color={currentColors.success}
+              />
 
               <Text style={[styles.infoLabel, { color: currentColors.textSecondary }]}>
                 Estado
@@ -149,7 +154,7 @@ export default function ProjectDetailsScreen() {
               style={[
                 styles.infoCard,
                 {
-                  backgroundColor: currentColors.surface,
+                  backgroundColor: currentColors.card,
                   borderColor: currentColors.border,
                 },
               ]}
@@ -169,7 +174,7 @@ export default function ProjectDetailsScreen() {
               style={[
                 styles.infoCard,
                 {
-                  backgroundColor: currentColors.surface,
+                  backgroundColor: currentColors.card,
                   borderColor: currentColors.border,
                 },
               ]}
@@ -205,7 +210,7 @@ export default function ProjectDetailsScreen() {
                 style={[
                   styles.screenshot,
                   {
-                    backgroundColor: currentColors.surface,
+                    backgroundColor: currentColors.card,
                     borderColor: currentColors.border,
                   },
                 ]}
@@ -218,19 +223,14 @@ export default function ProjectDetailsScreen() {
           <View style={styles.actionsRow}>
             <Pressable
               onPress={() => openUrl(project.githubUrl)}
-              style={styles.secondaryButton}
+              style={[styles.secondaryButton, { backgroundColor: currentColors.secondary }]}
             >
               <Text style={styles.buttonText}>Ver en GitHub</Text>
             </Pressable>
 
             <Pressable
               onPress={() => openUrl(project.demoUrl)}
-              style={[
-                styles.primaryButton,
-                {
-                  backgroundColor: currentColors.primary,
-                },
-              ]}
+              style={[styles.primaryButton, { backgroundColor: currentColors.primary }]}
             >
               <Text style={styles.buttonText}>Ver Demo</Text>
             </Pressable>
@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
     height: 170,
     marginTop: spacing.xl,
     borderRadius: radius.xl,
-    backgroundColor: "rgba(255,255,255,0.16)",
+    backgroundColor: "rgba(255,255,255,0.12)",
     alignItems: "center",
     justifyContent: "center",
     transform: [{ rotate: "-4deg" }],
@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
   },
   categoryText: {
     fontSize: typography.caption,
-    fontWeight: "700",
+    fontWeight: "800",
   },
   description: {
     marginTop: spacing.lg,
@@ -305,12 +305,17 @@ const styles = StyleSheet.create({
     gap: spacing.sm,
   },
   techChip: {
+    minWidth: 88,
+    height: 30,
     paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
     borderRadius: radius.lg,
+    borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  techChipText: {
     fontSize: typography.caption,
-    fontWeight: "700",
-    overflow: "hidden",
+    fontWeight: "800",
   },
   infoGrid: {
     flexDirection: "row",
@@ -355,7 +360,6 @@ const styles = StyleSheet.create({
   },
   secondaryButton: {
     flex: 1,
-    backgroundColor: "#0F172A",
     paddingVertical: spacing.md,
     borderRadius: radius.md,
     alignItems: "center",
