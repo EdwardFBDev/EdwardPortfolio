@@ -1,0 +1,88 @@
+import { Project } from "@/types/project";
+
+export const projects: Project[] = [
+  {
+    id: "taskflow-manager",
+    title: "TaskFlow Manager",
+    description: "Aplicación web para gestión de tareas y equipos en tiempo real.",
+    longDescription:
+      "TaskFlow Manager fue desarrollado para ayudar a equipos a organizar tareas, asignar responsables y hacer seguimiento del progreso en tiempo real. Incluye autenticación, roles de usuario, chat interno y reportes.",
+    technologies: ["React", "Node.js", "TypeScript", "MongoDB", "Socket.io", "TailwindCSS"],
+    category: "Web App",
+    status: "Completado",
+    date: "Mar 2024",
+    year: "2024",
+    githubUrl: "https://github.com/",
+    demoUrl: "https://demo.com/",
+  },
+  {
+    id: "ecommerce-pro",
+    title: "E-Commerce Pro",
+    description: "Plataforma de comercio electrónico completa con pasarela de pagos.",
+    longDescription:
+      "E-Commerce Pro simula una tienda en línea con catálogo de productos, carrito de compras, pagos digitales, panel administrativo y manejo básico de órdenes.",
+    technologies: ["Next.js", "Stripe", "PostgreSQL", "Node.js"],
+    category: "Web App",
+    status: "Completado",
+    date: "Abr 2024",
+    year: "2024",
+    githubUrl: "https://github.com/",
+    demoUrl: "https://demo.com/",
+  },
+  {
+    id: "chatify",
+    title: "Chatify",
+    description: "Aplicación de mensajería en tiempo real con sockets.",
+    longDescription:
+      "Chatify es una aplicación de mensajería que permite conversaciones en tiempo real, manejo de usuarios conectados y una experiencia mobile-first.",
+    technologies: ["React Native", "Socket.io", "Expo", "Node.js"],
+    category: "Mobile App",
+    status: "Completado",
+    date: "Jun 2023",
+    year: "2023",
+    githubUrl: "https://github.com/",
+    demoUrl: "https://demo.com/",
+  },
+  {
+    id: "analytics-dashboard",
+    title: "Analytics Dashboard",
+    description: "Dashboard administrativo con métricas y reportes avanzados.",
+    longDescription:
+      "Analytics Dashboard permite visualizar métricas clave mediante gráficas, tarjetas de resumen, filtros y reportes simulados para toma de decisiones.",
+    technologies: ["Vue.js", "Chart.js", "Express", "MongoDB"],
+    category: "Dashboard",
+    status: "Completado",
+    date: "Ago 2023",
+    year: "2023",
+    githubUrl: "https://github.com/",
+    demoUrl: "https://demo.com/",
+  },
+  {
+    id: "auth-api",
+    title: "Auth API",
+    description: "API para autenticación, roles de usuario y seguridad.",
+    longDescription:
+      "Auth API es un servicio backend enfocado en autenticación segura, manejo de tokens, roles de usuario y protección de rutas privadas.",
+    technologies: ["Node.js", "JWT", "Express", "MongoDB"],
+    category: "Backend",
+    status: "Completado",
+    date: "Ene 2025",
+    year: "2025",
+    githubUrl: "https://github.com/",
+    demoUrl: "https://demo.com/",
+  },
+  {
+    id: "finance-mobile-app",
+    title: "Finance Mobile App",
+    description: "Aplicación móvil para control de gastos personales.",
+    longDescription:
+      "Finance Mobile App permite registrar ingresos y gastos, clasificar movimientos, visualizar balances y consultar un resumen financiero simple.",
+    technologies: ["React Native", "Expo", "TypeScript"],
+    category: "Mobile App",
+    status: "En progreso",
+    date: "Feb 2026",
+    year: "2026",
+    githubUrl: "https://github.com/",
+    demoUrl: "https://demo.com/",
+  },
+];
