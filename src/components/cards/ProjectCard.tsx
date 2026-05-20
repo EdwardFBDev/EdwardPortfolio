@@ -1,22 +1,21 @@
-import { Pressable, StyleSheet, Text, View, useColorScheme } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import { Project } from "@/types/project";
-import { colors } from "@/theme/colors";
 import { spacing } from "@/theme/spacing";
 import { typography } from "@/theme/typography";
 import { radius } from "@/theme/radius";
 import { shadows } from "@/theme/shadows";
-import { useAppTheme } from "@/context/ThemeContext";
+import { useThemeColors } from "@/hooks/useThemeColors";
 
 interface Props {
   project: Project;
   onPress: () => void;
 }
 
+// Tarjeta reutilizable para mostrar un proyecto.
 export default function ProjectCard({ project, onPress }: Props) {
-  const { theme } = useAppTheme();
-  const currentColors = theme === "dark" ? colors.dark : colors.light;
+  const { theme, currentColors } = useThemeColors();
 
   return (
     <Pressable
@@ -144,6 +143,6 @@ const styles = StyleSheet.create({
   },
   year: {
     fontSize: typography.caption,
-    fontWeight: "600",
+    fontWeight: "700",
   },
 });

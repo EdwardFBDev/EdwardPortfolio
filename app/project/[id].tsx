@@ -1,11 +1,11 @@
 import {
   Alert,
   Linking,
+  Pressable,
   ScrollView,
   StyleSheet,
   Text,
   View,
-  useColorScheme,
 } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
@@ -13,20 +13,29 @@ import { Ionicons } from "@expo/vector-icons";
 import ScreenContainer from "@/components/layout/ScreenContainer";
 
 import { projects } from "@/data/projects";
-import { colors } from "@/theme/colors";
 import { spacing } from "@/theme/spacing";
 import { typography } from "@/theme/typography";
 import { radius } from "@/theme/radius";
 import { shadows } from "@/theme/shadows";
-import { useAppTheme } from "@/context/ThemeContext";
+import { useThemeColors } from "@/hooks/useThemeColors";
 
+// Pantalla de detalle para mostrar más información del proyecto seleccionado.
 export default function ProjectDetailsScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-
-  const { theme } = useAppTheme();
-  const currentColors = theme === "dark" ? colors.dark : colors.light;
+  const { theme, currentColors } = useThemeColors();
 
   const project = projects.find((item) => item.id === id);
+
+  const openUrl = async (url: string) => {
+    const canOpen = await Linking.canOpenURL(url);
+
+    if (!canOpen) {
+      Alert.alert("Enlace no disponible", "No se pudo abrir este enlace.");
+      return;
+    }
+
+    await Linking.openURL(url);
+  };
 
   if (!project) {
     return (
@@ -44,28 +53,14 @@ export default function ProjectDetailsScreen() {
     );
   }
 
-  const openUrl = async (url: string) => {
-    const canOpen = await Linking.canOpenURL(url);
-
-    if (!canOpen) {
-      Alert.alert("Enlace no disponible", "No se pudo abrir este enlace.");
-      return;
-    }
-
-    await Linking.openURL(url);
-  };
-
   return (
     <ScreenContainer>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={[styles.hero, { backgroundColor: currentColors.primary }]}>
           <View style={styles.topBar}>
-            <Ionicons
-              name="chevron-back"
-              size={28}
-              color="#FFFFFF"
-              onPress={() => router.back()}
-            />
+            <Pressable onPress={() => router.back()}>
+              <Ionicons name="chevron-back" size={28} color="#FFFFFF" />
+            </Pressable>
 
             <Ionicons name="share-outline" size={24} color="#FFFFFF" />
           </View>
@@ -140,9 +135,11 @@ export default function ProjectDetailsScreen() {
               ]}
             >
               <Ionicons name="checkmark-circle-outline" size={18} color="#22C55E" />
+
               <Text style={[styles.infoLabel, { color: currentColors.textSecondary }]}>
                 Estado
               </Text>
+
               <Text style={[styles.infoValue, { color: currentColors.text }]}>
                 {project.status}
               </Text>
@@ -158,9 +155,11 @@ export default function ProjectDetailsScreen() {
               ]}
             >
               <Ionicons name="calendar-outline" size={18} color={currentColors.primary} />
+
               <Text style={[styles.infoLabel, { color: currentColors.textSecondary }]}>
                 Fecha
               </Text>
+
               <Text style={[styles.infoValue, { color: currentColors.text }]}>
                 {project.date}
               </Text>
@@ -176,9 +175,11 @@ export default function ProjectDetailsScreen() {
               ]}
             >
               <Ionicons name="folder-outline" size={18} color={currentColors.primary} />
+
               <Text style={[styles.infoLabel, { color: currentColors.textSecondary }]}>
                 Categoría
               </Text>
+
               <Text style={[styles.infoValue, { color: currentColors.text }]}>
                 {project.category}
               </Text>
@@ -215,19 +216,24 @@ export default function ProjectDetailsScreen() {
           </ScrollView>
 
           <View style={styles.actionsRow}>
-            <Text
+            <Pressable
               onPress={() => openUrl(project.githubUrl)}
-              style={[styles.secondaryButton]}
+              style={styles.secondaryButton}
             >
-              Ver en GitHub
-            </Text>
+              <Text style={styles.buttonText}>Ver en GitHub</Text>
+            </Pressable>
 
-            <Text
+            <Pressable
               onPress={() => openUrl(project.demoUrl)}
-              style={[styles.primaryButton, { backgroundColor: currentColors.primary }]}
+              style={[
+                styles.primaryButton,
+                {
+                  backgroundColor: currentColors.primary,
+                },
+              ]}
             >
-              Ver Demo
-            </Text>
+              <Text style={styles.buttonText}>Ver Demo</Text>
+            </Pressable>
           </View>
         </View>
       </ScrollView>
@@ -350,18 +356,18 @@ const styles = StyleSheet.create({
   secondaryButton: {
     flex: 1,
     backgroundColor: "#0F172A",
-    color: "#FFFFFF",
-    textAlign: "center",
     paddingVertical: spacing.md,
     borderRadius: radius.md,
-    fontWeight: "800",
+    alignItems: "center",
   },
   primaryButton: {
     flex: 1,
-    color: "#FFFFFF",
-    textAlign: "center",
     paddingVertical: spacing.md,
     borderRadius: radius.md,
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "#FFFFFF",
     fontWeight: "800",
   },
   notFoundContainer: {

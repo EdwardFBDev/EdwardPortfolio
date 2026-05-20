@@ -1,12 +1,11 @@
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 
-import { useAppTheme } from "@/context/ThemeContext";
-import { colors } from "@/theme/colors";
+import { useThemeColors } from "@/hooks/useThemeColors";
 
+// Navegación inferior principal (Tabs).
 export default function TabsLayout() {
-  const { theme } = useAppTheme();
-  const currentColors = theme === "dark" ? colors.dark : colors.light;
+  const { currentColors } = useThemeColors();
 
   return (
     <Tabs
@@ -15,25 +14,11 @@ export default function TabsLayout() {
         tabBarActiveTintColor: currentColors.primary,
         tabBarInactiveTintColor: currentColors.textSecondary,
         tabBarStyle: {
-          position: "absolute",
-          left: 24,
-          right: 24,
-          bottom: 30,
-          height: 68,
-          borderRadius: 28,
+          height: 110,
           backgroundColor: currentColors.surface,
-          borderTopWidth: 0,
-          elevation: 8,
-          shadowColor: "#000",
-          shadowOpacity: 0.12,
-          shadowRadius: 12,
-          shadowOffset: {
-            width: 0,
-            height: 6,
-          },
-        },
-        tabBarItemStyle: {
-          paddingTop: 10,
+          borderTopWidth: 1,
+          borderTopColor: currentColors.border,
+          paddingTop: 8,
           paddingBottom: 10,
         },
         tabBarLabelStyle: {

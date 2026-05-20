@@ -1,16 +1,15 @@
 import { ReactNode } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
 
-import { colors } from "@/theme/colors";
-import { useAppTheme } from "@/context/ThemeContext";
+import { useThemeColors } from "@/hooks/useThemeColors";
 
 interface Props {
   children: ReactNode;
 }
 
+// Contenedor base para mantener el mismo fondo en todas las pantallas.
 export default function ScreenContainer({ children }: Props) {
-  const { theme } = useAppTheme();
-  const currentColors = theme === "dark" ? colors.dark : colors.light;
+  const { currentColors } = useThemeColors();
 
   return (
     <SafeAreaView

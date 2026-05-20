@@ -5,15 +5,16 @@ import ScreenContainer from "@/components/layout/ScreenContainer";
 import ThemeToggle from "@/components/buttons/ThemeToggle";
 
 import { useAppTheme } from "@/context/ThemeContext";
-import { colors } from "@/theme/colors";
 import { spacing } from "@/theme/spacing";
 import { typography } from "@/theme/typography";
 import { radius } from "@/theme/radius";
 import { shadows } from "@/theme/shadows";
+import { useThemeColors } from "@/hooks/useThemeColors";
 
+// Pantalla para controlar preferencias simples de la app.
 export default function SettingsScreen() {
   const { theme } = useAppTheme();
-  const currentColors = theme === "dark" ? colors.dark : colors.light;
+  const { currentColors } = useThemeColors();
 
   return (
     <ScreenContainer>
@@ -35,7 +36,14 @@ export default function SettingsScreen() {
             },
           ]}
         >
-          <View style={styles.iconBox}>
+          <View
+            style={[
+              styles.iconBox,
+              {
+                backgroundColor: currentColors.background,
+              },
+            ]}
+          >
             <Ionicons
               name={theme === "dark" ? "moon-outline" : "sunny-outline"}
               size={24}
@@ -64,6 +72,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: spacing.xl,
+    paddingTop: spacing.xl+20,
   },
   title: {
     fontSize: typography.h1,
@@ -90,7 +99,6 @@ const styles = StyleSheet.create({
     borderRadius: radius.lg,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#EAF0FF",
   },
   info: {
     flex: 1,

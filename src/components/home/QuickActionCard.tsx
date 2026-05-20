@@ -1,17 +1,11 @@
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-import { colors } from "@/theme/colors";
 import { spacing } from "@/theme/spacing";
 import { radius } from "@/theme/radius";
 import { typography } from "@/theme/typography";
 import { shadows } from "@/theme/shadows";
-import { useAppTheme } from "@/context/ThemeContext";
+import { useThemeColors } from "@/hooks/useThemeColors";
 
 interface Props {
   title: string;
@@ -19,28 +13,34 @@ interface Props {
   onPress?: () => void;
 }
 
+// Tarjeta pequeña para acciones rápidas desde Home.
 export default function QuickActionCard({ title, icon, onPress }: Props) {
-  const { theme } = useAppTheme();
-  const currentColors = theme === "dark" ? colors.dark : colors.light;
+  const { currentColors } = useThemeColors();
 
   return (
     <Pressable
       onPress={onPress}
-      style={[
+      style={({ pressed }) => [
         styles.card,
         {
           backgroundColor: currentColors.surface,
           borderColor: currentColors.border,
+          opacity: pressed ? 0.85 : 1,
         },
       ]}
     >
-      <View style={[styles.iconContainer, { backgroundColor: currentColors.background }]}>
+      <View
+        style={[
+          styles.iconContainer,
+          {
+            backgroundColor: currentColors.background,
+          },
+        ]}
+      >
         <Ionicons name={icon} size={22} color={currentColors.primary} />
       </View>
 
-      <Text style={[styles.title, { color: currentColors.text }]}>
-        {title}
-      </Text>
+      <Text style={[styles.title, { color: currentColors.text }]}>{title}</Text>
     </Pressable>
   );
 }
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: typography.caption,
-    fontWeight: "600",
+    fontWeight: "700",
     textAlign: "center",
   },
 });

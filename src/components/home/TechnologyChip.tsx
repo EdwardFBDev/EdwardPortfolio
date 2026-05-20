@@ -1,38 +1,26 @@
-import {
-  StyleSheet,
-  Text,
-  useColorScheme,
-} from "react-native";
+import { StyleSheet, Text } from "react-native";
 
-import { colors } from "@/theme/colors";
 import { spacing } from "@/theme/spacing";
 import { radius } from "@/theme/radius";
 import { typography } from "@/theme/typography";
-import { useAppTheme } from "@/context/ThemeContext";
+import { useThemeColors } from "@/hooks/useThemeColors";
 
 interface Props {
   label: string;
 }
 
-export default function TechnologyChip({
-  label,
-}: Props) {
-  const { theme } = useAppTheme();
-
-  const currentColors =
-    theme === "dark"
-      ? colors.dark
-      : colors.light;
+// Chip visual para mostrar tecnologías.
+export default function TechnologyChip({ label }: Props) {
+  const { currentColors } = useThemeColors();
 
   return (
     <Text
       style={[
         styles.chip,
         {
-          backgroundColor:
-            currentColors.background,
-
+          backgroundColor: currentColors.surface,
           color: currentColors.primary,
+          borderColor: currentColors.border,
         },
       ]}
     >
@@ -45,13 +33,10 @@ const styles = StyleSheet.create({
   chip: {
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm,
-
     borderRadius: radius.lg,
-
+    borderWidth: 1,
     fontSize: typography.caption,
-
-    fontWeight: "600",
-
+    fontWeight: "700",
     overflow: "hidden",
   },
 });

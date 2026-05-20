@@ -1,16 +1,17 @@
 import { Pressable, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-import { colors } from "@/theme/colors";
 import { useAppTheme } from "@/context/ThemeContext";
+import { useThemeColors } from "@/hooks/useThemeColors";
 
 interface Props {
   variant?: "hero" | "surface";
 }
 
+// Botón para cambiar entre tema claro y oscuro.
 export default function ThemeToggle({ variant = "surface" }: Props) {
   const { theme, toggleTheme } = useAppTheme();
-  const currentColors = theme === "dark" ? colors.dark : colors.light;
+  const { currentColors } = useThemeColors();
 
   const isHero = variant === "hero";
 

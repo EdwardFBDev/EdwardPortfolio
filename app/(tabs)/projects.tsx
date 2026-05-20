@@ -7,19 +7,17 @@ import ScreenContainer from "@/components/layout/ScreenContainer";
 import ProjectCard from "@/components/cards/ProjectCard";
 
 import { projects } from "@/data/projects";
-import { useAppTheme } from "@/context/ThemeContext";
-import { colors } from "@/theme/colors";
 import { spacing } from "@/theme/spacing";
 import { typography } from "@/theme/typography";
 import { radius } from "@/theme/radius";
+import { useThemeColors } from "@/hooks/useThemeColors";
 
 const filters = ["Todos", "Web App", "Mobile App", "Backend", "Dashboard"];
 
+// Pantalla que muestra los proyectos usando FlatList.
 export default function ProjectsScreen() {
   const [selectedFilter, setSelectedFilter] = useState("Todos");
-
-  const { theme } = useAppTheme();
-  const currentColors = theme === "dark" ? colors.dark : colors.light;
+  const { currentColors } = useThemeColors();
 
   const filteredProjects =
     selectedFilter === "Todos"
@@ -96,7 +94,7 @@ export default function ProjectsScreen() {
 const styles = StyleSheet.create({
   header: {
     paddingHorizontal: spacing.xl,
-    paddingTop: spacing.xl,
+    paddingTop: spacing.xl+20,
     paddingBottom: spacing.md,
   },
   headerTop: {
@@ -131,6 +129,6 @@ const styles = StyleSheet.create({
   },
   list: {
     paddingHorizontal: spacing.xl,
-    paddingBottom: 120,
+    paddingBottom: spacing.xl,
   },
 });
